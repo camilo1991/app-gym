@@ -7,22 +7,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root { --bg: #0d1117; --card: #161b22; --accent: #2ea043; --text: #c9d1d9; --border: #30363d; }
-        body { background: var(--bg); color: var(--text); padding-bottom: 50px; font-family: -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding-bottom: 50px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         
         /* Cronómetro */
         .timer-box { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 20px; }
-        .timer-display { font-size: 3rem; font-weight: bold; color: var(--accent); font-family: monospace; text-shadow: 0 0 10px rgba(46, 160, 67, 0.3); }
+        .timer-display { font-size: 3rem; font-weight: bold; color: var(--accent); font-family: 'Courier New', Courier, monospace; text-shadow: 0 0 10px rgba(46, 160, 67, 0.3); }
         
         /* Lista de Ejercicios */
-        .exercise-item { border-left: 4px solid var(--accent); padding: 15px; margin-bottom: 12px; background: var(--card); border-radius: 0 12px 12px 0; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .exercise-item { border-left: 4px solid var(--accent); padding: 15px; margin-bottom: 12px; background: var(--card); border-radius: 0 12px 12px 0; border-top: 1px solid var(--border); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); transition: transform 0.2s; }
+        .exercise-item:active { transform: scale(0.98); }
         
         /* Inputs Editables */
         .input-editable { background: transparent; border: none; color: #fff; font-weight: bold; font-size: 1.1rem; width: 85%; padding: 2px 5px; border-radius: 4px; }
         .input-editable:focus { background: #0d1117; outline: 1px solid var(--accent); }
-        .edit-hint { font-size: 0.7rem; color: #8b949e; display: block; margin-top: -2px; }
         
         /* Badge de Carga Previa */
         .prev-load-badge { font-size: 0.75rem; color: #8b949e; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); }
+        
+        /* Progress Bar Custom */
+        .progress { background: #30363d; border-radius: 10px; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -30,8 +33,8 @@
     <div class="timer-box shadow-sm">
         <div class="timer-display" id="display">00:00:00</div>
         <div class="btn-group mt-2 w-100">
-            <button class="btn btn-outline-success border-secondary text-white" id="startStop">Iniciar</button>
-            <button class="btn btn-outline-secondary border-secondary text-white" id="reset">Reset</button>
+            <button class="btn btn-outline-success border-secondary text-white fw-bold" id="startStop">INICIAR</button>
+            <button class="btn btn-outline-secondary border-secondary text-white" id="reset">RESET</button>
         </div>
     </div>
 
@@ -40,8 +43,8 @@
             <small class="text-secondary small text-uppercase fw-bold">Progreso de hoy</small>
             <small class="text-success fw-bold" id="progreso-texto">0%</small>
         </div>
-        <div class="progress" style="height: 8px; background: #30363d;">
-            <div id="progreso-barra" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+        <div class="progress" style="height: 10px;">
+            <div id="progreso-barra" class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
         </div>
     </div>
 
@@ -70,34 +73,36 @@
             
             <?php for($i=2; $i < count($hoy); $i++): 
                 $nombreEj = $hoy[$i];
-                // Lógica de carga previa
+                // Lógica de carga previa (Se asume que $ultimosPesos viene del Controller)
                 $ultimoPeso = isset($ultimosPesos[$nombreEj]) ? $ultimosPesos[$nombreEj] . " LB" : "---";
             ?>
                 <div class="exercise-item d-flex justify-content-between align-items-center">
                     <div class="flex-grow-1">
-                        <input type="text" class="input-editable" value="<?php echo $nombreEj; ?>" id="name-<?php echo $i; ?>">
+                        <input type="text" class="input-editable" value="<?php echo $nombreEj; ?>" id="name-<?php echo $i; ?>" spellcheck="false">
                         <div class="d-flex align-items-center gap-2 mt-1">
                             <span class="prev-load-badge">Última vez: <b class="text-success"><?php echo $ultimoPeso; ?></b></span>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-registrar fw-bold shadow-sm" 
+                    <button class="btn btn-primary btn-registrar fw-bold shadow-sm px-3" 
                             data-index="<?php echo $i; ?>" 
                             onclick="abrirModal(document.getElementById('name-<?php echo $i; ?>').value, <?php echo $i; ?>)">
-                        Registrar
+                        REGISTRAR
                     </button>
                 </div>
             <?php endfor; ?>
         </div>
+    <?php else: ?>
+        <div class="alert alert-dark border-secondary text-center">Hoy es día de descanso. ¡Recupera energías!</div>
     <?php endif; ?>
 
-    <a href="index.php" class="btn btn-dark w-100 p-3 border-secondary mb-4">Volver al Dashboard</a>
+    <a href="index.php" class="btn btn-dark w-100 p-3 border-secondary mb-4">VOLVER AL DASHBOARD</a>
 </div>
 
 <div class="modal fade" id="modalRegistro" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark border-secondary text-white shadow-lg">
             <div class="modal-header border-secondary">
-                <h5 class="modal-title text-success" id="titEj"></h5>
+                <h5 class="modal-title text-success fw-bold" id="titEj"></h5>
             </div>
             <form id="formSerie">
                 <div class="modal-body text-center">
@@ -107,11 +112,11 @@
                     <div class="row g-2">
                         <div class="col-6">
                             <label class="small text-secondary mb-1">LB (Peso)</label>
-                            <input type="number" step="0.5" class="form-control bg-black text-white border-secondary p-3 text-center h4" id="p" placeholder="0.0" required>
+                            <input type="number" step="0.5" inputmode="decimal" class="form-control bg-black text-white border-secondary p-3 text-center h4" id="p" placeholder="0.0" required>
                         </div>
                         <div class="col-6">
                             <label class="small text-secondary mb-1">REPS (Repeticiones)</label>
-                            <input type="number" class="form-control bg-black text-white border-secondary p-3 text-center h4" id="r" placeholder="0" required>
+                            <input type="number" inputmode="numeric" class="form-control bg-black text-white border-secondary p-3 text-center h4" id="r" placeholder="0" required>
                         </div>
                     </div>
                 </div>
@@ -127,6 +132,8 @@
 <script>
     let seg = {};
     let startTime, timerInterval, elapsedTime = 0;
+    const modalEl = document.getElementById('modalRegistro');
+    const bModal = new bootstrap.Modal(modalEl);
 
     function abrirModal(nombre, index) {
         if (!seg[index]) seg[index] = 0;
@@ -134,7 +141,14 @@
         document.getElementById('ejHid').value = nombre;
         document.getElementById('idxHid').value = index;
         document.getElementById('contS').innerText = `SERIE ${seg[index] + 1} DE 4`;
-        new bootstrap.Modal(document.getElementById('modalRegistro')).show();
+        
+        // Limpiar campos para nueva entrada
+        document.getElementById('p').value = "";
+        document.getElementById('r').value = "";
+        
+        bModal.show();
+        // Focus automático al peso para ahorrar un tap
+        setTimeout(() => document.getElementById('p').focus(), 500);
     }
 
     document.getElementById('formSerie').onsubmit = function(event) {
@@ -152,21 +166,24 @@
         formData.append('serie_num', seg[idx]);
 
         fetch('guardar_serie.php', { method: 'POST', body: formData })
-        .then(() => {
+        .then(response => {
             if (seg[idx] >= 4) {
-                bootstrap.Modal.getInstance(document.getElementById('modalRegistro')).hide();
+                bModal.hide();
                 document.querySelectorAll('.btn-registrar').forEach(b => {
                     if(b.getAttribute('data-index') === idx) {
                         b.innerText = '✅ OK';
-                        b.className = 'btn btn-success disabled';
+                        b.className = 'btn btn-success disabled px-3';
                     }
                 });
                 actualizarBarra();
             } else {
                 document.getElementById('contS').innerText = `SERIE ${seg[idx] + 1} DE 4`;
-                this.reset();
+                document.getElementById('p').value = "";
+                document.getElementById('r').value = "";
+                document.getElementById('p').focus();
             }
-        });
+        })
+        .catch(err => alert("Error al guardar: " + err));
     };
 
     function actualizarBarra() {
@@ -179,26 +196,26 @@
 
         if (hechos === total) {
             setTimeout(() => {
-                alert("¡BRUTAL! Rutina terminada. Revisa tus PRs en el historial.");
+                alert("¡BRUTAL! Rutina terminada. Revisa tu rendimiento.");
                 window.location.href = "index.php?page=historial";
             }, 600);
         }
     }
 
-    // Cronómetro funcional
+    // Lógica Cronómetro
     document.getElementById('startStop').onclick = function() {
-        if (this.innerText === "Iniciar") {
+        if (this.innerText === "INICIAR") {
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(() => {
                 elapsedTime = Date.now() - startTime;
                 let time = new Date(elapsedTime);
                 document.getElementById('display').innerText = time.toISOString().substr(11, 8);
             }, 1000);
-            this.innerText = "Pausar";
+            this.innerText = "PAUSAR";
             this.classList.replace('btn-outline-success', 'btn-warning');
         } else {
             clearInterval(timerInterval);
-            this.innerText = "Iniciar";
+            this.innerText = "INICIAR";
             this.classList.replace('btn-warning', 'btn-outline-success');
         }
     };
@@ -207,7 +224,10 @@
         clearInterval(timerInterval);
         elapsedTime = 0;
         document.getElementById('display').innerText = "00:00:00";
-        document.getElementById('startStop').innerText = "Iniciar";
+        const btnStart = document.getElementById('startStop');
+        btnStart.innerText = "INICIAR";
+        btnStart.classList.remove('btn-warning');
+        btnStart.classList.add('btn-outline-success');
     };
 </script>
 </body>
