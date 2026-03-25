@@ -588,3 +588,18 @@ Stack trace:
 [25-Mar-2026 19:38:18 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 60
 [25-Mar-2026 19:38:18 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
 [25-Mar-2026 19:38:18 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 20:26:34 UTC] PHP Parse error:  syntax error, unexpected token "exit" in /home/mndcuvmq/public_html/app-gym/logout.php on line 13
+[25-Mar-2026 20:36:59 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'username' in 'WHERE' in /home/mndcuvmq/public_html/app-gym/models/Usuario.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/models/Usuario.php(18): PDO->prepare()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php(34): Usuario->login()
+#2 /home/mndcuvmq/public_html/app-gym/index.php(13): AuthController->login()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/models/Usuario.php on line 18
+[25-Mar-2026 20:37:27 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'username' in 'WHERE' in /home/mndcuvmq/public_html/app-gym/models/Usuario.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/models/Usuario.php(18): PDO->prepare()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php(34): Usuario->login()
+#2 /home/mndcuvmq/public_html/app-gym/index.php(13): AuthController->login()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/models/Usuario.php on line 18

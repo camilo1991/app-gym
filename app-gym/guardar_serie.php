@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // ...pero insertamos en la columna 'repeticiones' que creamos en el SQL
-        $sql = "INSERT INTO series (usuario_id, ejercicio, peso, repeticiones, serie_num, fecha) 
+        $sql = "INSERT INTO series_v2 (usuario_id, ejercicio, peso, repeticiones, serie_num, fecha) 
                 VALUES (?, ?, ?, ?, ?, NOW())";
         
         $stmt = $pdo->prepare($sql);

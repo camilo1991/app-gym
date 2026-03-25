@@ -3,27 +3,42 @@
 session_start();
 require_once 'config/db.php';
 require_once 'controllers/GymController.php';
+require_once 'controllers/AuthController.php';
 
-// Simulación de login para pruebas (borrar cuando implementes login real)
-if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 1; 
-}
-
-$controller = new GymController($pdo);
-$userId = $_SESSION['user_id'];
-
-// Capturamos la acción: index.php?action=entrenar
+$auth = new AuthController($pdo);
 $action = $_GET['action'] ?? 'dashboard';
 
-switch ($action) {
-    case 'entrenar':
-        $controller->entrenar($userId);
-        break;
-    case 'historial':
-        $controller->historial($userId);
-        break;
-    case 'dashboard':
-    default:
-        $controller->mostrarDashboard(); // Coincide con el método en el controlador
-        break;
+// 1. Si la acci贸n es login o registrar, ejecutamos el m茅todo del controlador
+if ($action === 'login') {
+    $auth->login(); // Este m茅todo ya tiene el if(POST) dentro
+    exit;
 }
+
+if ($action === 'logout') {
+    $auth->logout();
+    exit;
+}
+
+// 2. PROTECCI脫N DE RUTA: Si no hay sesi贸n, mostramos el login y matamos el script
+if (!isset($_SESSION['user_id'])) {
+    $auth->showLogin();
+    exit;
+}
+
+// En tu index.php, a帽ade este caso al switch o antes de la validaci贸n de sesi贸n
+if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $auth->registrar(); // Llama al m茅todo de tu AuthController
+    exit;
+}
+
+// Para mostrar la vista de registro (cuando el usuario hace clic en el link)
+if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $auth->showRegister();
+    exit;
+}
+
+// 3. FLUJO NORMAL (Solo llega aqu铆 si hay sesi贸n real)
+$userId = $_SESSION['user_id'];
+$controller = new GymController($pdo);
+
+// ... resto de tu switch case ...

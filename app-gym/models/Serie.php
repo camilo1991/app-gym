@@ -8,7 +8,7 @@ class Serie {
 
     // Guarda el set y calcula el volumen total (peso * reps)
     public function registrarSet($user_id, $ejercicio, $peso, $reps, $n_serie) {
-        $sql = "INSERT INTO series (user_id, ejercicio, peso, reps, n_serie, fecha) VALUES (?, ?, ?, ?, ?, NOW())";
+        $sql = "INSERT INTO series_v2 (user_id, ejercicio, peso, reps, n_serie, fecha) VALUES (?, ?, ?, ?, ?, NOW())";
         return $this->db->prepare($sql)->execute([$user_id, $ejercicio, $peso, $reps, $n_serie]);
     }
 
@@ -18,7 +18,7 @@ class Serie {
                     DATE_FORMAT(fecha, '%b') as mes, 
                     MAX(peso) as max_peso,
                     SUM(reps) as total_reps
-                FROM series 
+                FROM series_v2 
                 WHERE user_id = ? AND ejercicio = ?
                 GROUP BY MONTH(fecha) 
                 ORDER BY fecha ASC 
@@ -30,7 +30,7 @@ class Serie {
 
     // Obtiene el último peso para la sugerencia automática
     public function getUltimoEsfuerzo($user_id, $ejercicio) {
-        $sql = "SELECT peso, reps FROM series WHERE user_id = ? AND ejercicio = ? ORDER BY fecha DESC LIMIT 1";
+        $sql = "SELECT peso, reps FROM series_v2 WHERE user_id = ? AND ejercicio = ? ORDER BY fecha DESC LIMIT 1";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$user_id, $ejercicio]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
