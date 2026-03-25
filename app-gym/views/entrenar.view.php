@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Entrenar | Rodríguez Gym OS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root { --bg: #0d1117; --card: #161b22; --accent: #2ea043; --text: #c9d1d9; }
+        body { background: var(--bg); color: var(--text); padding-bottom: 50px; font-family: sans-serif; }
+        .timer-box { background: var(--card); border: 2px solid var(--accent); border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 20px; }
+        .timer-display { font-size: 3rem; font-weight: bold; color: var(--accent); font-family: monospace; }
+        .exercise-item { border-left: 3px solid var(--accent); padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.03); border-radius: 0 10px 10px 0; }
+    </style>
+</head>
+<body>
+<div class="container mt-3">
+    <div class="timer-box shadow">
+        <div class="timer-display" id="display">00:00:00</div>
+        <div class="btn-group mt-2 w-100">
+            <button class="btn btn-outline-success" id="startStop">Iniciar</button>
+            <button class="btn btn-outline-secondary" id="reset">Reset</button>
+        </div>
+    </div>
+
+    <?php
+        $dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        $dia_actual = $dias[date('w')];
+        $rutinas = [
+            'Lunes' => ['Pecho', 'Tríceps', 'Press Banca', 'Aperturas', 'Extensión Polea'],
+            'Martes' => ['Espalda', 'Bíceps', 'Peso Muerto', 'Remo con Barra', 'Curl Martillo'],
+            'Miércoles' => ['Pierna', 'Hombro', 'Sentadilla', 'Prensa', 'Press Militar'],
+            'Jueves' => ['Pecho', 'Tríceps', 'Press Inclinado', 'Fondos', 'Copa'],
+            'Viernes' => ['Espalda', 'Bíceps', 'Dominadas', 'Remo Gironda', 'Curl Concentrado'],
+            'Sábado' => ['Pierna', 'Hombro', 'Zancadas', 'Elevaciones Laterales', 'Facepull']
+        ];
+        $hoy = $rutinas[$dia_actual] ?? null;
+    ?>
+
+    <h4>Rutina de Hoy <span class="badge bg-success float-end"><?php echo $dia_actual; ?></span></h4>
+
+    <?php if ($hoy): ?>
+        <div class="card bg-dark border-secondary p-3 mt-3">
+            <h5 class="text-success"><?php echo $hoy[0] . " & " . $hoy[1]; ?></h5>
+            <hr>
+            <?php for($i=2; $i < count($hoy); $i++): ?>
+                <div class="exercise-item d-flex justify-content-between align-items-center">
+                    <span><?php echo $hoy[$i]; ?></span>
+                    <button class="btn btn-sm btn-primary btn-registrar" data-ejercicio="<?php echo $hoy[$i]; ?>" onclick="abrirModal('<?php echo $hoy[$i]; ?>')">Registrar</button>
+                </div>
+            <?php endfor; ?>
+        </div>
+    <?php endif; ?>
+
+    <a href="index.php" class="btn btn-dark w-100 mt-3">Volver al Dashboard</a>
+</div>
+
+<div class="modal fade" id="modalRegistro" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark border-secondary text-white">
+            <div class="modal-header border-secondary"><h5 class="modal-title" id="titEj"></h5></div>
+            <form id="formSerie">
+                <div class="modal-body text-center">
+                    <div class="badge bg-success mb-3" id="contS">SERIE 1 DE 4</div>
+                    <input type="hidden" id="ejHid">
+                    <div class="row">
+                        <div class="col-6"><label class="small text-secondary">LB</label><input type="number" step="0.5" class="form-control bg-black text-white" id="p" required></div>
+                        <div class="col-6"><label class="small text-secondary">REPS</label><input type="number" class="form-control bg-black text-white" id="r" required></div>
+                    </div>
+                </div>
+                <div class="modal-footer border-secondary"><button type="submit" class="btn btn-success w-100">GUARDAR SERIE</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let seg = {};
+    let startTime, timerInterval, elapsedTime = 0;
+
+    function abrirModal(e) {
+        if (!seg[e]) seg[e] = 0;
+        document.getElementById('titEj').innerText = e;
+        document.getElementById('ejHid').value = e;
+        document.getElementById('contS').innerText = `SERIE ${seg[e] + 1} DE 4`;
+        new bootstrap.Modal(document.getElementById('modalRegistro')).show();
+    }
+
+    document.getElementById('formSerie').onsubmit = function(event) {
+        event.preventDefault();
+        const e = document.getElementById('ejHid').value;
+        const p = document.getElementById('p').value;
+        const r = document.getElementById('r').value;
+        seg[e]++;
+
+        const formData = new FormData();
+        formData.append('ejercicio', e);
+        formData.append('peso', p);
+        formData.append('reps', r);
+        formData.append('serie_num', seg[e]);
+
+        fetch('guardar_serie.php', { method: 'POST', body: formData })
+        .then(() => {
+            if (seg[e] >= 4) {
+                bootstrap.Modal.getInstance(document.getElementById('modalRegistro')).hide();
+                document.querySelectorAll('.btn-registrar').forEach(b => {
+                    if(b.getAttribute('data-ejercicio') === e) {
+                        b.innerText = '✅ Hecho';
+                        b.className = 'btn btn-sm btn-success disabled';
+                    }
+                });
+                validarFin();
+            } else {
+                document.getElementById('contS').innerText = `SERIE ${seg[e] + 1} DE 4`;
+                this.reset();
+            }
+        });
+    };
+
+    function validarFin() {
+        const total = document.querySelectorAll('.btn-registrar').length;
+        const hechos = document.querySelectorAll('.btn-registrar.disabled').length;
+        if (hechos === total) {
+            alert("¡BRUTAL! Rutina terminada.");
+            window.location.href = "index.php?page=historial";
+        }
+    }
+
+    // Cronómetro
+    document.getElementById('startStop').onclick = function() {
+        if (this.innerText === "Iniciar") {
+            startTime = Date.now() - elapsedTime;
+            timerInterval = setInterval(() => {
+                elapsedTime = Date.now() - startTime;
+                let time = new Date(elapsedTime);
+                document.getElementById('display').innerText = time.toISOString().substr(11, 8);
+            }, 1000);
+            this.innerText = "Pausar";
+        } else {
+            clearInterval(timerInterval);
+            this.innerText = "Iniciar";
+        }
+    };
+</script>
+</body>
+</html>

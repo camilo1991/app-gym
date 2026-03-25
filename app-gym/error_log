@@ -1,0 +1,202 @@
+[24-Mar-2026 22:16:15 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:16:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:18 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:21 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:22 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:23 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:27 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:18:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:19:59 UTC] PHP Warning:  require_once(config/db.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:19:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config/db.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:22:00 UTC] PHP Warning:  require_once(config.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:22:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:23:10 UTC] PHP Warning:  require_once(config.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 22:23:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'config.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/index.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 4
+[24-Mar-2026 17:27:55 America/Bogota] PHP Warning:  require_once(app/models/Usuario.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php on line 2
+[24-Mar-2026 17:27:55 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required 'app/models/Usuario.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php:2
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(9): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php on line 2
+[24-Mar-2026 17:30:07 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:08 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:09 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:09 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:09 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:10 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:30:10 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showLogin() in /home/mndcuvmq/public_html/app-gym/index.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 12
+[24-Mar-2026 17:39:58 America/Bogota] PHP Warning:  include(app/views/registro.view.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php on line 24
+[24-Mar-2026 17:39:58 America/Bogota] PHP Warning:  include(app/views/registro.view.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php on line 24
+[24-Mar-2026 17:39:58 America/Bogota] PHP Warning:  include(): Failed opening 'app/views/registro.view.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php on line 24
+[24-Mar-2026 17:40:55 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method AuthController::showRegister() in /home/mndcuvmq/public_html/app-gym/index.php:36
+Stack trace:
+#0 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/index.php on line 36
+[24-Mar-2026 18:03:20 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'andrey' for key 'username' in /home/mndcuvmq/public_html/app-gym/models/Usuario.php:13
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/models/Usuario.php(13): PDOStatement->execute()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/AuthController.php(64): Usuario->registrar()
+#2 /home/mndcuvmq/public_html/app-gym/index.php(29): AuthController->registrar()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/models/Usuario.php on line 13
+[24-Mar-2026 18:04:39 America/Bogota] PHP Warning:  include(app/views/dashboard.view.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/controllers/GymController.php on line 17
+[24-Mar-2026 18:04:39 America/Bogota] PHP Warning:  include(app/views/dashboard.view.php): Failed to open stream: No such file or directory in /home/mndcuvmq/public_html/app-gym/controllers/GymController.php on line 17
+[24-Mar-2026 18:04:39 America/Bogota] PHP Warning:  include(): Failed opening 'app/views/dashboard.view.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mndcuvmq/public_html/app-gym/controllers/GymController.php on line 17
+[24-Mar-2026 23:41:42 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:43 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:44 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:48 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:55 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:56 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:57 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:41:57 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'dominaec_user'@'localhost' (using password: YES) in /home/mndcuvmq/public_html/app-gym/config/config.php:18
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/index.php(3): require_once()
+#1 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/config/config.php on line 18
+[24-Mar-2026 23:55:55 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[24-Mar-2026 23:55:55 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:28
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[24-Mar-2026 23:57:09 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[24-Mar-2026 23:57:09 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:28
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[24-Mar-2026 23:59:19 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[24-Mar-2026 23:59:19 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:28
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[25-Mar-2026 00:00:18 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[25-Mar-2026 00:00:18 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:28
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 28
+[25-Mar-2026 00:02:17 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 6
+[25-Mar-2026 00:02:17 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:6
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 6
+[25-Mar-2026 00:07:51 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 00:07:51 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:20
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 00:11:45 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 00:11:45 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:20
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 00:12:22 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 00:12:22 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:20
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
