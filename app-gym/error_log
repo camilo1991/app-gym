@@ -200,3 +200,10 @@ Stack trace:
 #1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
 #2 {main}
   thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 15:57:29 UTC] PHP Warning:  Undefined variable $pdo in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 15:57:29 UTC] PHP Fatal error:  Uncaught Error: Call to a member function prepare() on null in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:20
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(40): include()
+#1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
+#2 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20

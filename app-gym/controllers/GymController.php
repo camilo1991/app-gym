@@ -1,9 +1,6 @@
 <?php
 // controllers/GymController.php
-
-// Cargamos los modelos necesarios (Rutas absolutas)
 require_once __DIR__ . '/../models/Usuario.php';
-// require_once __DIR__ . '/../models/Serie.php'; // Descomenta cuando crees este modelo
 
 class GymController {
     private $db;
@@ -12,66 +9,56 @@ class GymController {
         $this->db = $pdo;
     }
 
-    /**
-     * Muestra el panel principal del usuario
-     */
     public function mostrarDashboard($userId) {
-        // 1. Obtenemos los datos frescos del usuario (Pesos, metas, etc.)
         $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE id = ?");
         $stmt->execute([$userId]);
         $usuario = $stmt->fetch();
 
-        // 2. Aquí podrías traer también el resumen de la última rutina
-        // $ultimaSerie = ... lógica para el modelo Serie
-
-        // 3. Cargamos la vista (Ruta absoluta)
         if ($usuario) {
+            // Lógica de mensaje dinámico para el Dashboard
+            $hora = date('H');
+            if ($hora < 11) {
+                $mensaje = "¡El mundo es de los que madrugan! A darle con toda. 🔥";
+            } elseif ($hora < 18) {
+                $mensaje = "Cada repetición cuenta para tu meta de " . $usuario['peso_ideal'] . " kg. ⚡";
+            } else {
+                $mensaje = "Buen trabajo hoy, descansa para mañana. 🌙";
+            }
             include __DIR__ . '/../views/dashboard.view.php';
         } else {
-            // Si por alguna razón no hay usuario, cerramos sesión
             header("Location: index.php?action=logout");
         }
     }
-public function mostrarHistorial($userId) {
-    $stmt = $this->db->prepare("SELECT * FROM series WHERE usuario_id = ? ORDER BY fecha DESC LIMIT 20");
-    $stmt->execute([$userId]);
-    $historial = $stmt->fetchAll();
-    
-    include __DIR__ . '/../views/historial.view.php';
-}
-    /**
-     * Muestra la interfaz para registrar ejercicios
-     */
+
+    public function mostrarHistorial($userId) {
+        // 1. Obtener días con actividad para el calendario de cuadritos
+        $stmtCal = $this->db->prepare("SELECT DISTINCT DATE(fecha) as dia FROM series WHERE usuario_id = ?");
+        $stmtCal->execute([$userId]);
+        $diasEntrenados = $stmtCal->fetchAll(PDO::FETCH_COLUMN);
+
+        // 2. Obtener lo mejor de HOY segmentado por ejercicio
+        $stmtHoy = $this->db->prepare("SELECT ejercicio, MAX(peso) as max_h, COUNT(*) as total 
+                                       FROM series 
+                                       WHERE usuario_id = ? AND DATE(fecha) = CURDATE() 
+                                       GROUP BY ejercicio");
+        $stmtHoy->execute([$userId]);
+        $resumenHoy = $stmtHoy->fetchAll();
+
+        // 3. Obtener récords previos para generar sugerencias técnicas
+        $stmtSug = $this->db->prepare("SELECT ejercicio, MAX(peso) as record_ant 
+                                       FROM series 
+                                       WHERE usuario_id = ? AND DATE(fecha) < CURDATE() 
+                                       GROUP BY ejercicio");
+        $stmtSug->execute([$userId]);
+        $sugerencias = $stmtSug->fetchAll(PDO::FETCH_KEY_PAIR);
+
+        include __DIR__ . '/../views/historial.view.php';
+    }
+
     public function mostrarEntrenamiento($userId) {
-        // Datos del usuario para personalizar la experiencia
         $stmt = $this->db->prepare("SELECT nombre FROM usuarios WHERE id = ?");
         $stmt->execute([$userId]);
         $u = $stmt->fetch();
-
-        // Cargamos la vista de entrenamiento (Asegúrate de crear este archivo después)
         include __DIR__ . '/../views/entrenar.view.php';
-    }
-
-    /**
-     * Panel de administración (Solo accesible si eres Andrey)
-     */
-    public function mostrarAdmin() {
-        // Consultas para estadísticas globales
-        $totalUsers = $this->db->query("SELECT COUNT(*) FROM usuarios")->fetchColumn();
-        
-        include __DIR__ . '/../views/admin.view.php';
-    }
-
-    /**
-     * Procesa el guardado de una serie de ejercicio (POST)
-     */
-    public function guardarSerie() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Lógica para recibir peso, reps y rpe del formulario
-            // $resultado = $this->serieModel->insertar($_POST);
-            
-            header("Location: index.php?page=entrenar&status=success");
-            exit;
-        }
     }
 }
