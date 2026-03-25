@@ -1,9 +1,9 @@
-
 <?php
+// config/db.php
 $host = 'localhost';
-$db   = 'mndcuvmq_gym_db'; // Reemplaza con el nombre real de tu DB
-$user = 'mndcuvmq_admin_gym'; 
-$pass = 'Camilo1012380314*'; // La que generaste en el panel
+$db   = 'mndcuvmq_gym_os'; // Verifica que este sea el nombre real en tu cPanel
+$user = 'mndcuvmq_admin_gym';
+$pass = 'Camilo1012380314*';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -16,6 +16,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // Si hay error de conexión, esto lo mostrará
+    // Si falla, te dirá exactamente por qué (usuario, clave o bd)
     die("Error de conexión: " . $e->getMessage());
 }

@@ -1,4 +1,5 @@
 <?php
+// controllers/GymController.php
 class GymController {
     private $db;
 
@@ -6,14 +7,25 @@ class GymController {
         $this->db = $pdo;
     }
 
-    // ESTA ES LA FUNCIÓN QUE TE ESTÁ PIDIENDO LA LÍNEA 34
     public function mostrarDashboard() {
-        // Aquí podrías cargar datos rápidos para el dashboard si fuera necesario
-        include 'views/dashboard.view.php'; 
-    }
+    $userId = $_SESSION['user_id'];
+    
+    // Contar días entrenados en el mes actual
+    $stmt = $this->db->prepare("
+        SELECT COUNT(DISTINCT DATE(fecha)) as total_dias 
+        FROM series 
+        WHERE usuario_id = ? AND MONTH(fecha) = MONTH(CURRENT_DATE()) 
+        AND YEAR(fecha) = YEAR(CURRENT_DATE())
+    ");
+    $stmt->execute([$userId]);
+    $resumenMes = $stmt->fetch(PDO::FETCH_ASSOC);
+    $diasEntrenados = $resumenMes['total_dias'] ?? 0;
+
+    include 'views/dashboard.view.php';
+}
 
     public function entrenar($userId) {
-        // Obtener el último peso registrado por cada ejercicio
+        // Traer últimos pesos para los badges
         $stmt = $this->db->prepare("
             SELECT ejercicio, peso 
             FROM series s1 
@@ -29,12 +41,12 @@ class GymController {
     }
 
     public function historial($userId) {
-        // 1. Días entrenados (Consistencia 28D)
+        // 1. Consistencia (Cuadritos verdes)
         $stmt = $this->db->prepare("SELECT DISTINCT DATE(fecha) FROM series WHERE usuario_id = ? AND fecha >= DATE_SUB(CURDATE(), INTERVAL 28 DAY)");
         $stmt->execute([$userId]);
         $diasEntrenados = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // 2. Resumen de Hoy
+        // 2. Resumen de hoy vs récord
         $stmtHoy = $this->db->prepare("
             SELECT ejercicio, MAX(peso) as max_h, COUNT(*) as total,
             (SELECT MAX(peso) FROM series s2 WHERE s2.ejercicio = s1.ejercicio AND s2.usuario_id = s1.usuario_id AND DATE(s2.fecha) < CURDATE()) as record_historico
@@ -45,9 +57,9 @@ class GymController {
         $stmtHoy->execute([$userId]);
         $resumenHoy = $stmtHoy->fetchAll(PDO::FETCH_ASSOC);
 
-        // 3. Labels y Valores para Chart.js
-        $labels = json_encode(['Sem 4', 'Sem 3', 'Sem 2', 'Sem Actual']);
-        $valores = json_encode([4200, 4500, 4100, 4800]); 
+        // 3. Gráfica (Datos mockeados por ahora)
+        $labels = json_encode(['Sem 4', 'Sem 3', 'Sem 2', 'Hoy']);
+        $valores = json_encode([3500, 4200, 3800, 4000]);
 
         include 'views/historial.view.php';
     }
