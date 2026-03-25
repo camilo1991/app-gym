@@ -207,3 +207,55 @@ Stack trace:
 #1 /home/mndcuvmq/public_html/app-gym/index.php(23): GymController->mostrarHistorial()
 #2 {main}
   thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 20
+[25-Mar-2026 17:11:02 UTC] PHP Warning:  Undefined variable $diasEntrenados in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:11:02 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:66
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/views/historial.view.php(66): in_array()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(54): include('/home/mndcuvmq/...')
+#2 /home/mndcuvmq/public_html/app-gym/index.php(24): GymController->mostrarHistorial()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:12:53 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:12:53 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:13:00 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:13:00 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:13:11 UTC] PHP Warning:  Undefined variable $diasEntrenados in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:13:11 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:66
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/views/historial.view.php(66): in_array()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(54): include('/home/mndcuvmq/...')
+#2 /home/mndcuvmq/public_html/app-gym/index.php(33): GymController->mostrarHistorial()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:13:14 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:13:14 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:23:06 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:23:06 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:23:10 UTC] PHP Warning:  Undefined variable $diasEntrenados in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:23:10 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:66
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/views/historial.view.php(66): in_array()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(54): include('/home/mndcuvmq/...')
+#2 /home/mndcuvmq/public_html/app-gym/index.php(33): GymController->mostrarHistorial()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:23:12 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:23:12 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:24:11 UTC] PHP Warning:  Undefined variable $diasEntrenados in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:24:11 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:66
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/views/historial.view.php(66): in_array()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(54): include('/home/mndcuvmq/...')
+#2 /home/mndcuvmq/public_html/app-gym/index.php(33): GymController->mostrarHistorial()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:24:20 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 61
+[25-Mar-2026 17:24:20 UTC] PHP Warning:  Undefined variable $porcentaje in /home/mndcuvmq/public_html/app-gym/views/dashboard.view.php on line 64
+[25-Mar-2026 17:24:21 UTC] PHP Warning:  Undefined variable $diasEntrenados in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66
+[25-Mar-2026 17:24:21 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /home/mndcuvmq/public_html/app-gym/views/historial.view.php:66
+Stack trace:
+#0 /home/mndcuvmq/public_html/app-gym/views/historial.view.php(66): in_array()
+#1 /home/mndcuvmq/public_html/app-gym/controllers/GymController.php(54): include('/home/mndcuvmq/...')
+#2 /home/mndcuvmq/public_html/app-gym/index.php(33): GymController->mostrarHistorial()
+#3 {main}
+  thrown in /home/mndcuvmq/public_html/app-gym/views/historial.view.php on line 66

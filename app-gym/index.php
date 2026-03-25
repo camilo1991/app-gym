@@ -1,9 +1,18 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 session_start();
+// Lógica de Salida (Logout)
+if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+    session_unset();
+    session_destroy();
+    header("Location: index.php"); // Redirige al login
+    exit;
+}
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/controllers/AuthController.php';
 require_once __DIR__ . '/controllers/GymController.php';
+
+
 
 $auth = new AuthController($pdo);
 $gym  = new GymController($pdo);
