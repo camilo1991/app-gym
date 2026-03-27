@@ -1,66 +1,79 @@
 <?php
-// controllers/GymController.php
 class GymController {
     private $db;
 
     public function __construct($pdo) {
         $this->db = $pdo;
+        date_default_timezone_set('America/Bogota');
     }
 
-    public function mostrarDashboard() {
-    $userId = $_SESSION['user_id'];
-    
-    // Contar d�as entrenados en el mes actual
-    $stmt = $this->db->prepare("
-        SELECT COUNT(DISTINCT DATE(fecha)) as total_dias 
-        FROM series_v2 
-        WHERE usuario_id = ? AND MONTH(fecha) = MONTH(CURRENT_DATE()) 
-        AND YEAR(fecha) = YEAR(CURRENT_DATE())
-    ");
-    $stmt->execute([$userId]);
-    $resumenMes = $stmt->fetch(PDO::FETCH_ASSOC);
-    $diasEntrenados = $resumenMes['total_dias'] ?? 0;
+    public function mostrarDashboard($userId) {
+        $racha = $this->getSumRacha($userId);
+        
+        // Consulta simplificada para evitar Error 500 si la tabla está vacía
+        $stmtTop = $this->db->prepare("SELECT ejercicio, MAX(peso) as max_p FROM series_v2 WHERE usuario_id = ? GROUP BY ejercicio ORDER BY max_p DESC LIMIT 5");
+        $stmtTop->execute([$userId]);
+        $topRecords = $stmtTop->fetchAll(PDO::FETCH_ASSOC);
 
-    include 'views/dashboard.view.php';
-}
+        // Datos para el Heatmap
+        $stmtCal = $this->db->prepare("SELECT DISTINCT DATE(fecha) as dia FROM series_v2 WHERE usuario_id = ? AND fecha >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+        $stmtCal->execute([$userId]);
+        $fechasEntrenadas = $stmtCal->fetchAll(PDO::FETCH_COLUMN);
+
+        include 'views/dashboard.view.php';
+    }
 
     public function entrenar($userId) {
-        // Traer �ltimos pesos para los badges
-        $stmt = $this->db->prepare("
-            SELECT ejercicio, peso 
-            FROM series_v2 s1 
-            WHERE usuario_id = ? AND id = (
-                SELECT MAX(id) FROM series_v2 s2 
-                WHERE s2.ejercicio = s1.ejercicio AND s2.usuario_id = s1.usuario_id
-            )
-        ");
-        $stmt->execute([$userId]);
-        $ultimosPesos = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-
+        $n = (int)date('N'); 
+        $rutinas = [
+            1 => ['Press Banca', 'Press Inclinado', 'Press Militar', 'Vuelos Laterales'],
+            2 => ['Sentadilla', 'Prensa', 'Extensión Pierna', 'Pantorrilla'],
+            3 => ['Dominadas', 'Remo con Barra', 'Remo Gironda', 'Curl de Bíceps'],
+            4 => ['Press Banca (Refuerzo)', 'Aperturas Pecho', 'Press Militar (Mancuerna)', 'Vuelos Frontales'],
+            5 => ['Peso Muerto', 'Zancadas', 'Prensa (Pies Altos)', 'Flexión Pierna'],
+            6 => ['Full Body'], 7 => ['Descanso']
+        ];
+        $ejercicios_hoy = $rutinas[$n] ?? [];
         include 'views/entrenar.view.php';
     }
 
-    public function historial($userId) {
-        // 1. Consistencia (Cuadritos verdes)
-        $stmt = $this->db->prepare("SELECT DISTINCT DATE(fecha) FROM series_v2 WHERE usuario_id = ? AND fecha >= DATE_SUB(CURDATE(), INTERVAL 28 DAY)");
+    public function mostrarHistorial($userId) {
+        try {
+            // 1. Registros
+            $stmt = $this->db->prepare("SELECT id, fecha, ejercicio, peso, repeticiones FROM series_v2 WHERE usuario_id = ? ORDER BY fecha DESC");
+            $stmt->execute([$userId]);
+            $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // 2. Datos Gráfica
+            $stmtG = $this->db->prepare("SELECT DATE(fecha) as dia, SUM(peso * repeticiones) as vol FROM series_v2 WHERE usuario_id = ? GROUP BY DATE(fecha) ORDER BY dia DESC LIMIT 7");
+            $stmtG->execute([$userId]);
+            $graficaData = array_reverse($stmtG->fetchAll(PDO::FETCH_ASSOC));
+
+            include 'views/historial.view.php';
+        } catch (PDOException $e) {
+            die("Error en la base de datos: " . $e->getMessage());
+        }
+    }
+
+    public function eliminarSerie($userId, $idSerie) {
+        $stmt = $this->db->prepare("DELETE FROM series_v2 WHERE id = ? AND usuario_id = ?");
+        $success = $stmt->execute([$idSerie, $userId]);
+        header('Content-Type: application/json');
+        echo json_encode(['success' => $success]);
+        exit;
+    }
+
+    private function getSumRacha($userId) {
+        $stmt = $this->db->prepare("SELECT DISTINCT DATE(fecha) as f FROM series_v2 WHERE usuario_id = ? ORDER BY f DESC");
         $stmt->execute([$userId]);
-        $diasEntrenados = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-        // 2. Resumen de hoy vs r�cord
-        $stmtHoy = $this->db->prepare("
-            SELECT ejercicio, MAX(peso) as max_h, COUNT(*) as total,
-            (SELECT MAX(peso) FROM series_v2 s2 WHERE s2.ejercicio = s1.ejercicio AND s2.usuario_id = s1.usuario_id AND DATE(s2.fecha) < CURDATE()) as record_historico
-            FROM series_v2 s1
-            WHERE usuario_id = ? AND DATE(fecha) = CURDATE()
-            GROUP BY ejercicio
-        ");
-        $stmtHoy->execute([$userId]);
-        $resumenHoy = $stmtHoy->fetchAll(PDO::FETCH_ASSOC);
-
-        // 3. Gr�fica (Datos mockeados por ahora)
-        $labels = json_encode(['Sem 4', 'Sem 3', 'Sem 2', 'Hoy']);
-        $valores = json_encode([3500, 4200, 3800, 4000]);
-
-        include 'views/historial.view.php';
+        $fechas = $stmt->fetchAll(PDO::FETCH_COLUMN);
+        if(!$fechas) return 0;
+        $racha = 0; $hoy = new DateTime(date('Y-m-d'));
+        foreach($fechas as $f){
+            $fe = new DateTime($f);
+            $diff = $hoy->diff($fe)->days;
+            if($diff <= 1){ $racha++; $hoy = $fe; } else break;
+        }
+        return $racha;
     }
 }

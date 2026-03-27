@@ -2,93 +2,63 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard | Rodríguez Gym OS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Rodríguez Gym</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --accent: #2ea043; --text: #c9d1d9; --border: #30363d; }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; }
-        .nav-header { background: var(--card); border-bottom: 1px solid var(--border); padding: 15px 0; }
-        .welcome-section { padding: 30px 0; }
-        
-        .menu-card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            padding: 25px; 
-            text-align: center; 
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text);
-            display: block;
-            margin-bottom: 20px;
-        }
-        .menu-card:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-5px); 
-            background: #1c2128;
-        }
-        .menu-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; display: block; }
-        .menu-card h3 { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
-        .menu-card p { font-size: 0.85rem; color: #8b949e; margin-bottom: 0; }
-
-        .btn-logout { color: #f85149; border-color: rgba(248, 81, 73, 0.4); }
-        .btn-logout:hover { background: rgba(248, 81, 73, 0.1); border-color: #f85149; }
-
-        .racha-card { background: rgba(46, 160, 67, 0.05); border: 1px dashed var(--accent); border-radius: 12px; }
-        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--accent); line-height: 1; margin: 10px 0; }
+        :root { --bg: #0d1117; --card: #161b22; --accent: #39d353; --border: #30363d; }
+        body { background: var(--bg); color: #c9d1d9; padding: 15px; font-family: sans-serif; }
+        .stats-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 20px; }
+        .cal-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin-top: 10px; }
+        .cal-dot { aspect-ratio: 1/1; border-radius: 2px; background: #21262d; }
+        .cal-dot.active { background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+        .rec-item { background: #0d1117; border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--border); }
     </style>
 </head>
 <body>
-
-<header class="nav-header">
-    <div class="container d-flex justify-content-between align-items-center">
-        <span class="fw-bold text-success text-uppercase" style="letter-spacing: 1px;">Rodríguez <span class="text-white">Gym OS</span></span>
-        <a href="logout.php" class="btn btn-sm btn-outline-danger btn-logout px-3">Salir</a>
-    </div>
-</header>
-
-<div class="container welcome-section text-center">
-    <h1 class="h4 mb-1">¡Hola, Andrey!</h1>
-    <p class="text-secondary small">¿Qué vamos a romper hoy? 💪</p>
-</div>
-
 <div class="container">
-    <div class="row g-3">
-        <div class="col-6">
-            <a href="index.php?action=entrenar" class="menu-card shadow-sm h-100">
-                <i class="bi bi-play-circle-fill"></i>
-                <h3>Entrenar</h3>
-                <p>Iniciar rutina</p>
-            </a>
-        </div>
-        
-        <div class="col-6">
-            <a href="index.php?action=historial" class="menu-card shadow-sm h-100">
-                <i class="bi bi-bar-chart-fill"></i>
-                <h3>Historial</h3>
-                <p>Ver evolución</p>
-            </a>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <h3 class="text-white fw-bold mb-0">¡Hola, Camilo!</h3>
+        <a href="logout.php" class="text-danger"><i class="bi bi-power fs-4"></i></a>
+    </div>
 
-        <div class="col-12 mt-3">
-            <div class="racha-card p-4 text-center">
-                <div class="d-flex align-items-center justify-content-center gap-2">
-                    <i class="bi bi-calendar-check text-success"></i>
-                    <span class="small fw-bold text-white text-uppercase">Consistencia Mensual</span>
+    <div class="stats-card text-center">
+        <span class="text-secondary small fw-bold text-uppercase">Consistencia (30 días)</span>
+        <div class="cal-grid">
+            <?php 
+            for($i=29; $i>=0; $i--): 
+                $dia_check = date('Y-m-d', strtotime("-$i days"));
+                $is_active = in_array($dia_check, $fechasEntrenadas);
+            ?>
+                <div class="cal-dot <?php echo $is_active ? 'active' : ''; ?>"></div>
+            <?php endfor; ?>
+        </div>
+        <div class="mt-3 text-white h2 fw-bold"><i class="bi bi-fire text-danger"></i> <?php echo $racha; ?> Días</div>
+    </div>
+
+    <h6 class="text-secondary fw-bold mb-3">HALL OF FAME (PRs)</h6>
+    <?php foreach($topRecords as $r): ?>
+        <div class="rec-item">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <div class="text-white fw-bold text-uppercase small"><?php echo $r['ejercicio']; ?></div>
+                    <div class="text-secondary" style="font-size: 0.75rem;">
+                        <i class="bi bi-calendar-event"></i> <?php echo $r['fecha_formateada']; ?>
+                    </div>
                 </div>
-                
-                <div class="stat-number"><?php echo $diasEntrenados ?? 0; ?></div>
-                
-                <p class="text-secondary mb-0" style="font-size: 0.85rem;">
-                    Días entrenados en **<?php echo date('F'); ?>**
-                </p>
+                <div class="text-end">
+                    <div class="text-success fw-bold h5 mb-0"><?php echo $r['max_p']; ?> <small>LB</small></div>
+                    <div class="text-secondary small"><?php echo $r['reps']; ?> Reps</div>
+                </div>
             </div>
         </div>
+    <?php endforeach; ?>
+
+    <div class="d-grid gap-3 mt-4 mb-5">
+        <a href="index.php?action=entrenar" class="btn btn-success p-3 fw-bold fs-5 shadow">EMPEZAR HOY</a>
+        <a href="index.php?action=historial" class="btn btn-outline-secondary p-3 fw-bold">VER TODO EL HISTORIAL</a>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
